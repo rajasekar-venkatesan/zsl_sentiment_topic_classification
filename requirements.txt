@@ -1,4 +1,5 @@
 spacy
+pytorch
 streamlit
 matplotlib
 transformers
