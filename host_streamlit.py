@@ -1,10 +1,9 @@
 # Imports
-import spacy
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
 from feasibility_study import model
-nlp = spacy.load("en_core_web_sm")
+
 
 # Main
 """
@@ -19,10 +18,10 @@ Given a text, try to find out whether the text entered belongs to Financial Coun
 
 
 raw_text = st.text_area("Enter text: ", "I was hospitalized last week. The hospital was well maintained but too crowded. Their service was good. I had to wait for long time before seeing the doctor.")
-doc = nlp(raw_text)
+sentences = [item.strip() for item in raw_text.split(".") if len(item.strip())>1]
 choice = st.selectbox("Choose Analysis Level: ", ['Document Level', 'Sentence Level'])
 if choice == 'Sentence Level':
-    sentences = {i: sent.text for i, sent in enumerate(doc.sents)}
+    sentences = {i: sent.text for i, sent in enumerate(sentences)}
     st.write(sentences)
     sentence_choice = st.selectbox("Choose a sentence to analyze: ", list(sentences.keys()))
     text = sentences.get(int(sentence_choice))
